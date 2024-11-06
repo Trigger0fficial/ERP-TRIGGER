@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  {% for el in projects %}
+    {{ el.id }}
+  <a href="{% url 'client_estimate' el.id %}">{{ el.name }}</a>
+  {% endfor %}
+</body>
+</html>

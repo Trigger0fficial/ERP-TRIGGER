@@ -1,0 +1,202 @@
+{% extends 'server/technical/index.html' %}
+{% load static %}
+
+
+{% block title %}{{ data.title }}{% endblock %}
+{% block content %}
+
+<div class="page-wrapper">
+	<div class="page-content">
+		<!--breadcrumb-->
+		<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+			<div class="breadcrumb-title pe-3">Проекты</div>
+			<div class="ps-3">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb mb-0 p-0">
+						<li class="breadcrumb-item"><a href="{% url 'total_projects' %}"><i class="bx bx-home-alt"></i></a>
+						</li>
+						<li class="breadcrumb-item active" aria-current="page">Создать новый проект</li>
+					</ol>
+				</nav>
+			</div>
+
+		</div>
+		<!--end breadcrumb-->
+	  <div class="card">
+		  <div class="card-body p-4">
+			   <div class="form-body mt-4">
+				  <form method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-lg-8">
+							<div class="border border-3 p-4 rounded">
+								{% if form.non_field_errors %}
+									<div class="alert alert-danger">
+										{{ form.non_field_errors }}
+									</div>
+								{% endif %}
+
+								<div class="mb-3">
+									<label for="inputProductTitle" class="form-label">Наименование проекта</label>
+									{{ form.name }}
+									{% if form.name.errors %}
+										<div class="alert alert-danger">
+											{{ form.name.errors }}
+										</div>
+									{% endif %}
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Выбор сотрудников</label>
+									{{ form.staff }}
+									{% if form.staff.errors %}
+										<div class="alert alert-danger">
+											{{ form.staff.errors }}
+										</div>
+									{% endif %}
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Добавление разделов</label>
+									{{ form.chapter }}
+									{% if form.chapter.errors %}
+										<div class="alert alert-danger">
+											{{ form.chapter.errors }}
+										</div>
+									{% endif %}
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Постановка задач</label>
+									{{ form.task }}
+									{% if form.task.errors %}
+										<div class="alert alert-danger">
+											{{ form.task.errors }}
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="border border-3 p-4 rounded">
+								<div class="row g-3">
+									<div class="col-md-6">
+										<label for="inputPrice" class="form-label">Стоимость проекта</label>
+										{{ form.total_cost }}
+										{% if form.total_cost.errors %}
+											<div class="alert alert-danger">
+												{{ form.total_cost.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-md-6">
+										<label class="form-label">Доп затраты</label>
+										{{ form.additional_costs }}
+										{% if form.additional_costs.errors %}
+											<div class="alert alert-danger">
+												{{ form.additional_costs.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-md-6">
+										<label class="form-label">Дата начала</label>
+										{{ form.data_start }}
+										{% if form.data_start.errors %}
+											<div class="alert alert-danger">
+												{{ form.data_start.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-md-6">
+										<label class="form-label">Дата окончания</label>
+										{{ form.data_end }}
+										{% if form.data_end.errors %}
+											<div class="alert alert-danger">
+												{{ form.data_end.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-12">
+										<label for="inputProductType" class="form-label">Заказчик</label>
+										{{ form.customer }}
+										{% if form.customer.errors %}
+											<div class="alert alert-danger">
+												{{ form.customer.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-12">
+										<label for="inputVendor" class="form-label">Статус</label>
+										{{ form.status }}
+										{% if form.status.errors %}
+											<div class="alert alert-danger">
+												{{ form.status.errors }}
+											</div>
+										{% endif %}
+									</div>
+									<div class="col-12">
+										<div class="d-grid">
+											<button type="submit" class="btn btn-primary">Сохранить проект</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		  </div>
+	  </div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'server/assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/simplebar/js/simplebar.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/metismenu/js/metisMenu.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/chartjs/js/Chart.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
+    <script src="{% static 'server/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/sparkline-charts/jquery.sparkline.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/jquery-knob/excanvas.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/jquery-knob/jquery.knob.js' %}"></script>
+
+	<script src="{% static 'server/assets/plugins/datetimepicker/js/legacy.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/datetimepicker/js/picker.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/datetimepicker/js/picker.time.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/datetimepicker/js/picker.date.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js' %}"></script>
+
+
+	<script src="{% static 'server/assets/plugins/fancy-file-uploader/jquery.ui.widget.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/fancy-file-uploader/jquery.fileupload.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/fancy-file-uploader/jquery.iframe-transport.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/fancy-file-uploader/jquery.fancy-fileupload.js' %}"></script>
+	<script src="{% static 'server/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js' %}"></script>
+
+	<script src="{% static 'server/assets/plugins/select2/js/select2.min.js' %}"></script>
+
+	<script>
+    $('#fancy-file-upload').FancyFileUpload({ params: { action: 'fileuploader' }, maxfilesize: 1000000 });
+</script>
+<script>
+    $(document).ready(function () { $('#image-uploadify').imageuploadify(); });
+</script>
+<script>
+    $('.single-select').select2({ theme: 'bootstrap4', width: $(this).data('width') || '100%', placeholder: $(this).data('placeholder'), allowClear: true });
+    $('.multiple-select').select2({ theme: 'bootstrap4', width: $(this).data('width') || '100%', placeholder: $(this).data('placeholder'), allowClear: true });
+</script>
+<script>
+    $('.datepicker').pickadate({ selectMonths: true, selectYears: true });
+</script>
+<script>
+    $(function () {
+        $('#date-time').bootstrapMaterialDatePicker({ format: 'YYYY-MM-DD HH:mm' });
+        $('#date').bootstrapMaterialDatePicker({ time: false });
+        $('#time').bootstrapMaterialDatePicker({ date: false, format: 'HH:mm' });
+    });
+</script>
+{% endblock %}
